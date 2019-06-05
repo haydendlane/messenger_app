@@ -1,0 +1,15 @@
+{% extends "messenger/base.html" %}
+{% block content %}
+<h2>Oops...Something went wrong</h2>
+<p>Error Message:</p>
+<p>The server encountered an internal error or
+    misconfiguration and was unable to complete
+    your request.</p>
+    <p>Please contact the server administrator,
+     <a href="mailto:hayden@hlanetech.com">hayden@hlanetech.com</a> and inform them of the time the error occurred,
+    and anything you might have done that may have
+    caused the error.</p>
+<div class="text-center">
+    <a href="{% url 'messenger-dashboard' %}" class="btn btn-lg btn-primary mt-5">Go to Home Page</a>    
+</div>
+{% endblock content %}

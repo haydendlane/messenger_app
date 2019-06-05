@@ -1,0 +1,16 @@
+{% extends "messenger/base.html" %}
+{% block content %}
+<h2>Dashboard</h2>
+<h3>Welcome, {{ user.first_name }}!</h3>
+<div class="row text-center">
+    <div class="col-xl-4">
+        <a href="{% url 'client-list' %}" class="btn btn-lg btn-primary mt-5"><span class="oi oi-people btn-dashboard" title="clients" aria-hidden="true"></span><br />Manage Clients</a>
+    </div>
+    <div class="col-xl-4">
+        <a href="{% url 'select-client' %}" class="btn btn-lg btn-primary mt-5"><span class="oi oi-envelope-closed btn-dashboard" title="envelope" aria-hidden="true"></span><br />Send a Message</a>
+    </div>
+    <div class="col-xl-4">
+        <a href="{% url 'message-history' %}" class="btn btn-lg btn-primary mt-5"><span class="oi oi-graph btn-dashboard" title="history" aria-hidden="true"></span><br />View History</a>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends "messenger/base.html" %}
+{% block content %}
+    <a class="btn btn-secondary btn-sm mb-3" href="{% url 'message-history' %}">&lt; All History</a>
+    <a class="btn btn-secondary btn-sm mb-3" href="{% url 'client-detail' object.client.id %}">&lt; Client History</a>
+    <article class="media content-section">
+        <div class="media-body">
+            <h2 class="article-title">{{ object.client.first_name }} {{ object.client.last_name }}</h2>
+            <p class="article-content"><strong>Phone Number:</strong> {{ object.client.phone_number }}</p>
+            <p class="article-content"><strong>Date Sent:</strong> {{ object.date_sent }}</p>
+            <p class="article-content text-capitalize"><strong>Delivery Status:</strong> {{ object.delivery_status }}</p>
+            <hr />
+            <small class="article-content text-muted"><strong>Message ID:</strong> {{ object.message_sid }}</small>
+        </div>
+    </article>
+{% endblock content %}

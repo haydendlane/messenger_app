@@ -1,0 +1,39 @@
+{% extends "messenger/base.html" %}
+{% block content %}
+    <h2>Message History</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Date Sent</th>
+                <th scope="col">Client Name</th>
+                <th scope="col">Delivery Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in object_list %}
+            <tr>
+                <td><a href="{% url 'message-detail' message.message_sid %}">{{ message.date_sent }}</a></td>
+                <td>{{ message.client.first_name }} {{ message.client.last_name }}</td>
+                <td class="text-capitalize">{{ message.delivery_status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+            <a class="btn btn-outline-info mb4" href="?page=1">First</a>
+            <a class="btn btn-outline-info mb4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+                <a class="btn btn-info mb4" href="?page={{ num }}">{{ num }}</a>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-info mb4" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+            <a class="btn btn-outline-info mb4" href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a class="btn btn-outline-info mb4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+    {% endif %}
+{% endblock content %}

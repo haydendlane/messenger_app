@@ -1,0 +1,21 @@
+{% extends "messenger/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Send Message</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <p>Please confirm client information before sending: 
+                    <strong>{{ client.first_name }} {{client.last_name}}</strong> at 
+                    <strong>{{ client.phone_number }}</strong></p>
+                <p class="text-danger">Are you ready to send?</p>
+                <button class="btn btn-outline-info" type="submit">Send</button>
+                <a class="btn btn-outline-danger" href="{% url 'client-list' %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

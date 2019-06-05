@@ -1,0 +1,33 @@
+{% extends "messenger/base.html" %}
+{% block content %}
+    <a class="btn btn-secondary btn-sm mb-3" href="{% url 'client-list' %}">&lt; All Clients</a>
+    <article class="media content-section">
+        <div class="media-body">
+            <h2 class="article-title">{{ object.first_name }} {{ object.last_name }}</h2>
+            <p class="article-content">{{ object.phone_number }}</p>
+            <div class="text-right">
+                <a class="btn btn-outline-info btn-sm mt-1 mr-5 mb-1 float-left" href="{% url 'message-create' client.id %}">Send Message</a>
+                <a class="btn btn-outline-secondary btn-sm mt-1 mb-1" href="{% url 'client-update' client.id %}">Update</a>
+                <a class="btn btn-outline-danger btn-sm mt-1 mb-1" href="{% url 'client-delete' client.id %}">Delete</a>
+            </div>
+        </div>
+    </article>
+        <h2>Message History</h2>
+        <p>Last 5 Messages</p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Date Sent</th>
+                    <th scope="col">Delivery Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for message_obj in message_history reversed %}
+                <tr>
+                    <td><a href="{% url 'message-detail' message_obj.message_sid %}">{{ message_obj.date_sent }}</a></td>
+                    <td class="text-capitalize">{{ message_obj.delivery_status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock content %}
